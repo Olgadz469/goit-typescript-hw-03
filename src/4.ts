@@ -36,7 +36,8 @@ class Key {
 }
 
 class Person {
-  constructor(private key: Key) {
+  private key: Key;
+  constructor(key: Key) {
     this.key = key;
   }
   getKey() {
@@ -55,7 +56,7 @@ abstract class House {
   abstract openDoor(key: Key): void;
 
   comeIn(person: Person): void {
-    if (this.door === true) {
+    if (this.door) {
       this.tenants.push(person);
     }
   }
@@ -64,7 +65,7 @@ abstract class House {
 class MyHouse extends House {
   openDoor(key: Key): void {
     if (key.getSignature() === this.key.getSignature()) {
-      this.door === true;
+      this.door = true;
       console.log("open");
     } else {
       console.log("closed");
